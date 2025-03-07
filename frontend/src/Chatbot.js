@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./styles.css";
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [question, setQuestion] = useState("");
-  const chatEndRef = useRef(null);
+  const [isTyping, setIsTyping] = useState(false);
 
-  const BACKEND_URL = "https://nba-rag-chatbot.onrender.com"; // Update for Health Chatbot
+  const BACKEND_URL = "https://nba-rag-chatbot.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,32 +16,34 @@ const Chatbot = () => {
     const userMessage = { text: question, sender: "user" };
     setMessages((prev) => [...prev, userMessage]);
     setQuestion("");
+    setIsTyping(true); // Show typing indicator
 
     try {
       const res = await axios.post(`${BACKEND_URL}/ask`, { query: question });
-
       const botMessage = { text: res.data.response, sender: "bot" };
-      setMessages((prev) => [...prev, botMessage]);
+      setTimeout(() => {
+        setMessages((prev) => [...prev, botMessage]);
+        setIsTyping(false);
+      }, 1500); // Simulating bot delay for a smoother experience
     } catch (error) {
-      setMessages((prev) => [...prev, { text: "Error fetching response.", sender: "bot" }]);
+      setIsTyping(false);
+      setMessages((prev) => [
+        ...prev,
+        { text: "Error fetching response. Try again later.", sender: "bot" },
+      ]);
     }
   };
-
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
 
   return (
     <div className="chat-container">
       <div className="chat-box">
         {messages.map((msg, index) => (
           <div key={index} className={`message ${msg.sender}`}>
-            <p>{msg.text}</p>
+            {msg.text}
           </div>
         ))}
-        <div ref={chatEndRef} />
+        {isTyping && <div className="message bot typing">...</div>}
       </div>
-
       <form className="chat-form" onSubmit={handleSubmit}>
         <input
           type="text"
