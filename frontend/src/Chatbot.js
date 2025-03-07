@@ -7,7 +7,7 @@ const Chatbot = () => {
   const [question, setQuestion] = useState("");
   const chatEndRef = useRef(null);
 
-  const BACKEND_URL = "https://nba-rag-chatbot.onrender.com";  // Change to Health Chatbot URL
+  const BACKEND_URL = "https://nba-rag-chatbot.onrender.com"; // Update for Health Chatbot
 
   const handleSubmit = async (e) => {
     e.preventDefault();
