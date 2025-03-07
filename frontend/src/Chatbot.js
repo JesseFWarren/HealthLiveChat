@@ -7,7 +7,7 @@ const Chatbot = () => {
   const [question, setQuestion] = useState("");
   const [isTyping, setIsTyping] = useState(false);
 
-  const BACKEND_URL = "https://healthlivechatbackend.onrender.com/";
+  const BACKEND_URL = "https://healthlivechatbackend.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
