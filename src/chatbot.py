@@ -22,8 +22,8 @@ def ask_medical_chatbot(user_query):
 
         context = "\n".join(retrieved_diseases)
         prompt = f"""
-        You are a medical assistant trained on Mayo Clinic data. Use the provided medical context to suggest possible conditions 
-        and guide the user, but do NOT provide a formal diagnosis. Instead, suggest consulting a healthcare professional.
+        You are a medical assistant trained on Mayo Clinic data. Use the provided medical context to suggest possible condition, treatment options, 
+        and guide the user, but do NOT provide a formal diagnosis. Instead, suggest consulting a healthcare professional. Keep responses to a paragrph.
 
         Context:
         {context}
