@@ -36,9 +36,9 @@ def search(query, top_k=5):
     query_embedding = model.encode([query], convert_to_numpy=True)
     distances, indices = index.search(query_embedding, top_k)
 
+    # Return only disease names, removing the score
     results = [
-        (metadata[i], distances[0][idx]) for idx, i in enumerate(indices[0]) if i < len(metadata)
+        metadata[i] for i in indices[0] if i < len(metadata)
     ]
-    
-    return results
 
+    return results
