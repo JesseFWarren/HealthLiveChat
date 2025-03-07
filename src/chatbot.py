@@ -2,7 +2,7 @@ import os
 import faiss
 import numpy as np
 from openai import OpenAI
-from src.retrieval import retrieve_relevant_diseases  # Updated retrieval function
+from src.retrieval import search
 
 # OpenAI API key and Client
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
