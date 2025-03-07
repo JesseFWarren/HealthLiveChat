@@ -15,7 +15,7 @@ def ask_medical_chatbot(user_query):
     Retrieves relevant Mayo Clinic disease context and queries GPT-4.
     """
     try:
-        retrieved_diseases = retrieve_relevant_diseases(user_query)
+        retrieved_diseases = search(user_query)
 
         if not retrieved_diseases:
             return "I couldn't find relevant medical information. Try rephrasing your symptoms."
