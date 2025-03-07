@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from src.chatbot import ask_chatbot
+from src.chatbot import ask_medical_chatbot
 
 app = FastAPI()
 
@@ -19,7 +19,7 @@ class QueryRequest(BaseModel):
 @app.post("/ask")
 def ask(request: QueryRequest):
     """Handles incoming chatbot queries."""
-    response = ask_chatbot(request.query)
+    response = ask_medical_chatbot(request.query)
     return {"response": response}
 
 if __name__ == "__main__":
