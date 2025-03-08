@@ -9,6 +9,13 @@ const Chatbot = () => {
 
   const BACKEND_URL = "https://healthlivechatbackend.onrender.com";
 
+  // Add a welcome message when the chat loads
+  useEffect(() => {
+    setMessages([
+      { text: "Welcome to Health Live Chat! How can I assist you today?", sender: "bot" }
+    ]);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!question.trim()) return;
@@ -29,7 +36,7 @@ const Chatbot = () => {
       setIsTyping(false);
       setMessages((prev) => [
         ...prev,
-        { text: "Error fetching response. Try again later.", sender: "bot" },
+        { text: "Error fetching response. Try again later.", sender: "bot" }
       ]);
     }
   };
